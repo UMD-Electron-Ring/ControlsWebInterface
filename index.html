@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Magnet Status Page</title>
+ 
+  <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+<div class="wrapper" id="tableMain"></div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  refreshTablePHP();
+});
+
+function refreshTablePHP(){
+    $('#tableMain').hide().load('http://127.0.0.1:5000/php/', function(){
+       setTimeout(refreshTablePHP, 5000);
+    }).fadeIn();
+}
+</script>
+
+</body>
+</html>
