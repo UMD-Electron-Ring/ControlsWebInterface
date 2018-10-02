@@ -19,7 +19,7 @@ $(document).ready(function(){
 });
 
 function refreshTablePHP(){
-    $('#tableMain').hide().load('http://127.0.0.1:5000/php/', function(){
+    $("#tableMain").hide().load('http://127.0.0.1:5000/php/data', function(){
        setTimeout(refreshTablePHP, 5000);
     }).fadeIn();
 }

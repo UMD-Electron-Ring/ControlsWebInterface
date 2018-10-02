@@ -1,5 +1,4 @@
 import requests
-import time
 import datetime
 
 UPDATE_TIME = 5 # seconds
@@ -7,9 +6,10 @@ SERVER = 'http://127.0.0.1:8000/'
 magnets = ['H1','H2','H3','H4','H5','H6','H7','H8','H9','H10','H11','H12','H13','H14','H15','H16','H17']
 header = ('Magnet','Input Voltage','Output Voltage','Output Current')
 
+
 def getData():
 	data = []
-	data.append(header)
+	#data.append(header)
 	for magnet in magnets:
 		r3 = requests.get(SERVER+'ReadCurrent/'+magnet)
 		r2 = requests.get(SERVER+'ReadVoltage/'+magnet)
@@ -30,31 +30,40 @@ def createCSV(data):
 def createPHP(data):
 	header='<?php'
 	footer = '?>'
-	pdata = '<div class="table">'
-	for i,row in enumerate(data):
-		if i == 0:
-			pdata += '<div class="row header">'
-		else:
-			pdata += '<div class="row">'
+	pdata = '<div class="table"></div>'
+	for row in data:
+		pdata += '<div class="table">'
 		for j,item in enumerate(row):
-			pdata += '<div class="cell">'
-			pdata += str(item)
-			pdata += '</div>'
+			if j == 0:
+				pdata += '<div class="row header">'
+				pdata += '<div class="cell">'
+				pdata += str(item)
+				pdata += '</div>'
+				pdata += '</div>'
+			else:
+				pdata += '<div class="row">'			
+				pdata += '<div class="cell">'
+				pdata += str(item)
+				pdata += '</div>'
+				pdata += '</div>'				
 		pdata += '</div>'
-	pdata += '</div>'
 	
-	with open('data.php', 'w') as f:
+	with open('data/data.php', 'w') as f:
 		f.write(header+'\n')
 		f.write('echo \''+pdata+'\'; \n')
 		f.write(footer+'\n')
 		
-	
-while True:
-	data = getData()
-	createCSV(data)
-	createPHP(data)
-	print 'Updated: ' + str(datetime.datetime.now())
-	time.sleep(UPDATE_TIME)
+def createPHP2(data):
+	header='<?php'
+	footer = '?>'
+	for i,row in enumerate(data):
+		for j,item in enumerate(row):
+			if j != 0:
+				with open('data/'+magnets[i]+'-'+str(j)+'.php', 'w') as f:
+					f.write(header+'\n')
+					f.write('echo \''+str(item)+'\'; \n')
+					f.write(footer+'\n')
+				
 	
 	
 	

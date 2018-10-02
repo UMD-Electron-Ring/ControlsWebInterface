@@ -1,4 +1,9 @@
+Python:
+
 flask
+APScheduler
 flask-cors
 requests
+JS:
+
 jquery/ajax
