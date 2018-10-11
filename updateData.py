@@ -6,7 +6,6 @@ SERVER = 'http://127.0.0.1:8000/'
 magnets = ['H1','H2','H3','H4','H5','H6','H7','H8','H9','H10','H11','H12','H13','H14','H15','H16','H17']
 header = ('Magnet','Input Voltage','Output Voltage','Output Current')
 
-
 def getData():
 	data = []
 	#data.append(header)
@@ -41,8 +40,9 @@ def createPHP(data):
 				pdata += '</div>'
 				pdata += '</div>'
 			else:
-				pdata += '<div class="row">'			
+				pdata += '<div class="row">'
 				pdata += '<div class="cell">'
+				# implement future color checks w/ style="background:green"
 				pdata += str(item)
 				pdata += '</div>'
 				pdata += '</div>'				

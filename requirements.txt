@@ -4,6 +4,7 @@ flask
 APScheduler
 flask-cors
 requests
-JS:
+AWSIoTPythonSDK
 
+JS:
 jquery/ajax
